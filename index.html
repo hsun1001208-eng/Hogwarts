@@ -105,7 +105,7 @@ function update(){
  $('#clueCount').textContent=state.clues.size+'/6';$('#energy').textContent=state.energy;
  const tower=$('[data-go="tower"]'); if(state.clues.size>=6)tower.classList.remove('lock');
 }
-$('#startBtn').onclick=()=>{show('map');};
+$('#startBtn').onclick=()=>{ $('#intro').classList.remove('active'); $('#game').classList.add('active'); show('map'); };
 $$('[data-map]').forEach(b=>b.onclick=()=>show('map'));
 $$('.location').forEach(l=>l.onclick=()=>{const g=l.dataset.go;if(g==='tower'&&state.clues.size<6){toast('天文塔還沒有對你開門。');return}show(g)});
 /* library */
