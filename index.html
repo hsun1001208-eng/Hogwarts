@@ -3,142 +3,141 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
-<meta name="theme-color" content="#07100d">
-<title>吳悠｜霍格華茲：午夜護法事件</title>
+<title>吳悠的霍格華茲｜午夜生日事件</title>
 <style>
-:root{--bg:#07100d;--panel:#0d1915;--panel2:#12221c;--gold:#d8b56a;--gold2:#f0d99a;--ink:#e8eadf;--muted:#91a097;--danger:#d47777;--ok:#8bc9a2;--line:#2b4036}
-*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;background:#050a08;color:var(--ink);font-family:Georgia,"Noto Serif TC","PingFang TC",serif;overflow:hidden}
-button{font:inherit;color:inherit;background:none;border:0}button,.clickable{touch-action:manipulation;-webkit-tap-highlight-color:transparent}
-#app{height:100%;position:relative;overflow:hidden;background:radial-gradient(circle at 50% 15%,#17352a 0,#07100d 52%,#030705 100%)}
+*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#07100e;color:#eee9dc;font-family:Georgia,"Noto Serif TC","PingFang TC",serif}button{font:inherit;color:inherit}#app{height:100%;position:relative;overflow:hidden;background:radial-gradient(circle at 50% 40%,#263c35,#0a1311 65%,#050807)}
 .screen{position:absolute;inset:0;display:none}.screen.active{display:block}
-#intro{align-items:center;justify-content:center;text-align:center;padding:24px;background:
-radial-gradient(circle at 50% 38%,rgba(72,139,112,.22),transparent 35%),linear-gradient(180deg,rgba(4,10,8,.2),rgba(4,8,7,.94))}
-#intro.active{display:flex}.introCard{max-width:720px;width:100%;padding:34px 26px}.crest{width:86px;height:86px;margin:0 auto 20px;border:1px solid #9c7b3c;border-radius:50%;display:grid;place-items:center;color:var(--gold);font-size:36px;box-shadow:0 0 45px #b98a2b2b}
-.kicker{letter-spacing:5px;color:var(--gold);font-size:12px}.introCard h1{font-size:clamp(34px,7vw,68px);font-weight:500;letter-spacing:4px;margin:15px 0 5px}.introCard h2{font-size:18px;font-weight:400;color:#b8c0ba;margin:0 0 28px}.introStory{max-width:570px;margin:auto;color:#b2bcb5;line-height:2;font-size:15px}.introStory strong{color:var(--gold2);font-weight:400}.primary{margin-top:28px;padding:13px 25px;border:1px solid #967338;border-radius:7px;background:linear-gradient(180deg,#352b19,#211a11);cursor:pointer;letter-spacing:2px;box-shadow:0 8px 30px #0008}.primary:hover{filter:brightness(1.15)}
-#game{grid-template-rows:auto 1fr auto;background:linear-gradient(180deg,#09130f,#050a08)}
-#game.active{display:grid}
-.top{height:72px;border-bottom:1px solid var(--line);display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:0 20px;background:#07100de8;backdrop-filter:blur(10px);z-index:4}
-.brand{letter-spacing:3px;font-size:15px}.brand small{display:block;font-size:9px;letter-spacing:2px;color:#65756c;margin-top:4px}.time{text-align:center;font-size:20px;color:var(--gold2)}.time small{display:block;color:#697870;font-size:9px;letter-spacing:2px;margin-top:3px}.stats{justify-self:end;display:flex;gap:10px}.stat{min-width:90px;padding:7px 10px;border:1px solid var(--line);border-radius:6px;background:#0b1712;text-align:center;font-size:11px;color:#aab5af}.stat b{display:block;color:var(--gold2);font-size:15px;margin-top:2px}
-.main{min-height:0;display:grid;grid-template-columns:1fr 300px;gap:0}
-.mapWrap{min-width:0;position:relative;overflow:hidden;background:
-radial-gradient(ellipse at 52% 48%,rgba(70,108,87,.17),transparent 48%),
-linear-gradient(135deg,#0b1712,#07100d 60%,#050b08)}
-.map{position:absolute;inset:20px;display:grid;grid-template-columns:repeat(12,1fr);grid-template-rows:repeat(8,1fr);gap:10px;max-width:1000px;margin:auto}
-.room{position:relative;border:1px solid #294037;border-radius:8px;background:linear-gradient(145deg,#13241d,#0b1511);cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;min-width:0;overflow:hidden;transition:.25s;box-shadow:inset 0 0 30px #0004}
-.room:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 50% 20%,#6b987522,transparent 50%);opacity:.8}.room:hover{transform:translateY(-2px);border-color:#8c7440;box-shadow:0 8px 25px #0008,0 0 25px #8d6f2a16}.room.locked{opacity:.45;filter:saturate(.5)}.room.event{animation:pulse 1.5s infinite;border-color:#b68c48}.room.done{border-color:#557766}.room .sigil{font-size:26px;color:#cbb36f;z-index:1;margin-bottom:8px}.room .rname{font-size:13px;z-index:1}.room .sub{font-size:9px;color:#718078;margin-top:4px;z-index:1}
-.r1{grid-column:2/5;grid-row:2/4}.r2{grid-column:6/9;grid-row:1/3}.r3{grid-column:9/12;grid-row:3/5}.r4{grid-column:4/7;grid-row:4/7}.r5{grid-column:1/4;grid-row:5/8}.r6{grid-column:8/11;grid-row:6/8}.r7{grid-column:5/8;grid-row:7/9}
-.path{position:absolute;background:#5a624f20;border:1px dashed #69715b26;transform-origin:left center}
-.p1{width:32%;height:1px;left:25%;top:35%;transform:rotate(5deg)}.p2{width:26%;height:1px;left:50%;top:39%;transform:rotate(50deg)}.p3{width:32%;height:1px;left:24%;top:61%;transform:rotate(-10deg)}.p4{width:25%;height:1px;left:50%;top:70%;transform:rotate(-35deg)}
-.side{border-left:1px solid var(--line);background:#08110ee8;display:flex;flex-direction:column;min-height:0}.sideHead{padding:16px;border-bottom:1px solid var(--line);font-size:13px;letter-spacing:2px;color:var(--gold2)}#log{padding:14px 16px;overflow:auto;flex:1;font-size:12px;line-height:1.7;color:#9aa7a0}.logitem{padding:9px 0;border-bottom:1px solid #1a2a24}.logitem b{color:#c7d0ca;font-weight:400}.clue{color:var(--gold2)!important}.danger{color:var(--danger)!important}.ok{color:var(--ok)!important}
-.bottom{height:48px;border-top:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 18px;color:#748179;font-size:10px;letter-spacing:1px}.bottom button{cursor:pointer;color:#a9b4ad}.bottom button:hover{color:var(--gold2)}
-#modal{position:absolute;inset:0;background:#020605cc;backdrop-filter:blur(7px);display:none;align-items:center;justify-content:center;padding:18px;z-index:20}#modal.open{display:flex}.modalCard{width:min(780px,100%);max-height:92vh;overflow:auto;border:1px solid #3a5146;border-radius:12px;background:linear-gradient(160deg,#12231c,#08100d);box-shadow:0 25px 80px #000d}.modalHead{padding:18px 20px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center}.modalHead h2{font-size:20px;font-weight:400;margin:0;color:var(--gold2)}.close{cursor:pointer;color:#819087;font-size:22px}.modalBody{padding:20px}.desc{color:#a8b3ac;line-height:1.9;font-size:13px;margin:0 0 18px}.choices{display:grid;gap:10px}.choice{padding:14px;border:1px solid #30443b;border-radius:8px;background:#0d1914;text-align:left;cursor:pointer;transition:.2s}.choice:hover{border-color:#9b7b3e;background:#17241d}.choice strong{display:block;color:#d4c68e;font-weight:400;margin-bottom:4px}.choice span{font-size:11px;color:#87958d}
-.challenge{min-height:260px;border:1px solid #2c4137;border-radius:10px;background:#07100d;padding:20px;position:relative;overflow:hidden}.challengeTitle{text-align:center;color:#b7c5bd;font-size:12px;letter-spacing:2px;margin-bottom:18px}
-.bookGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.book{height:74px;border:1px solid #33483e;border-radius:6px;background:linear-gradient(90deg,#3b2920,#211a15);cursor:pointer;display:flex;align-items:center;justify-content:center;color:#ad966b;font-size:11px}.book:hover{border-color:#b08c48}.book.found{background:#173126;border-color:#79a888;color:#d4e6da}
-.runeCanvas{display:block;width:100%;height:180px;background:radial-gradient(circle,#12251d,#07100d);border:1px solid #2c4137;border-radius:8px;touch-action:none}.runeHint{text-align:center;font-size:11px;color:#738078;margin-top:10px}
-.cauldron{width:160px;height:105px;margin:15px auto;border:2px solid #80683d;border-radius:0 0 55px 55px/0 0 40px 40px;background:radial-gradient(ellipse at 50% 40%,#6d8c7c55,#1b2922 55%,#090e0c);display:grid;place-items:center;color:#c7d5ca}.ingredients{display:flex;justify-content:center;gap:10px;flex-wrap:wrap}.ingredient{padding:10px 13px;border:1px solid #34483e;border-radius:6px;background:#101c17;cursor:pointer;font-size:11px}.ingredient.used{opacity:.35;pointer-events:none}.potionMsg{text-align:center;color:#8ca399;font-size:11px;margin-top:12px}
-.timing{height:24px;border:1px solid #394d43;border-radius:20px;overflow:hidden;margin:35px 0 15px;background:#080f0c}.bar{height:100%;width:0;background:linear-gradient(90deg,#294d3d,#b79a51,#b75e5e)}.defend{display:block;margin:auto;padding:12px 28px;border:1px solid #856d3e;border-radius:7px;background:#201a10;cursor:pointer}.defend:disabled{opacity:.4}
-.lights{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;max-width:480px;margin:25px auto}.light{aspect-ratio:1;border-radius:50%;border:1px solid #41544a;background:#0a1310;cursor:pointer;box-shadow:inset 0 0 20px #000}.light.on{background:radial-gradient(circle,#f4e5a1,#907638 35%,#26332b 70%);box-shadow:0 0 25px #d7b45d88}.constellation{height:260px;position:relative;border:1px solid #2c4137;border-radius:8px;background:radial-gradient(circle at 20% 30%,#fff8 0 1px,transparent 2px),radial-gradient(circle at 70% 25%,#fff8 0 1px,transparent 2px),radial-gradient(circle at 60% 70%,#fff8 0 1px,transparent 2px),#050b09}.star{position:absolute;width:18px;height:18px;border:1px solid #b79b57;border-radius:50%;background:#101b16;cursor:pointer}.star.sel{background:#e0c56e;box-shadow:0 0 15px #d9bb62}.star.s1{left:18%;top:50%}.star.s2{left:36%;top:28%}.star.s3{left:53%;top:55%}.star.s4{left:70%;top:32%}.star.s5{left:82%;top:65%}
-#toast{position:absolute;left:50%;bottom:65px;transform:translate(-50%,10px);opacity:0;pointer-events:none;padding:10px 16px;border:1px solid #4b594e;border-radius:6px;background:#0b1511ee;color:#d6d8c8;font-size:12px;z-index:30;transition:.25s}.toastShow{opacity:1!important;transform:translate(-50%,0)!important}
-#ending{align-items:center;justify-content:center;text-align:center;background:#020706;z-index:40}.endbg{position:absolute;inset:0;background:radial-gradient(circle at 50% 55%,#2e6e7750,transparent 38%),linear-gradient(#020706aa,#020706ee)}.endContent{position:relative;z-index:2;width:min(1100px,96vw)}.endImg{width:min(900px,92vw);max-height:62vh;object-fit:contain;border-radius:10px;box-shadow:0 0 100px #6dbbd055,0 25px 80px #000}.endTitle{font-size:clamp(26px,5vw,48px);font-weight:400;letter-spacing:5px;color:#e9dbab;margin:15px 0 5px}.endSub{color:#a9b5ae;font-size:14px}.fire{position:absolute;inset:0;overflow:hidden;pointer-events:none}.spark{position:absolute;width:3px;height:3px;background:#d9c277;border-radius:50%;animation:fly 1.8s ease-out forwards}.restart{margin-top:18px;padding:10px 18px;border:1px solid #695b3c;border-radius:6px;cursor:pointer;background:#0c1712}
-@keyframes pulse{50%{box-shadow:0 0 0 7px #b28a3910,0 0 30px #b28a3940}}@keyframes fly{from{transform:translate(0,0);opacity:1}to{transform:translate(var(--x),var(--y));opacity:0}}
-@media(max-width:800px){.top{grid-template-columns:1fr auto;height:64px;padding:0 12px}.stats{display:none}.brand{font-size:12px}.main{grid-template-columns:1fr}.side{display:none}.map{inset:10px;gap:6px}.room .sigil{font-size:20px}.room .rname{font-size:11px}.room .sub{display:none}.r1{grid-column:1/5}.r2{grid-column:5/9}.r3{grid-column:9/13}.r4{grid-column:3/8;grid-row:4/6}.r5{grid-column:1/5;grid-row:6/9}.r6{grid-column:9/13;grid-row:6/9}.r7{grid-column:5/9;grid-row:7/9}.time{font-size:16px}.bottom{padding:0 10px}}
+/* cinematic intro */
+#intro{background:linear-gradient(120deg,#060b0b,#13211d 55%,#050807);align-content:center;text-align:center;padding:28px}.sigil{width:100px;height:100px;margin:0 auto 25px;border:1px solid #c4a86b;border-radius:50%;display:grid;place-items:center;color:#d7bd7b;font-size:42px;box-shadow:0 0 40px #d4b66b22}.eyebrow{letter-spacing:6px;color:#bfa875;font-size:12px}.introTitle{font-size:clamp(34px,7vw,70px);font-weight:400;letter-spacing:7px;margin:16px 0 8px}.introSub{color:#bcb4a3;font-size:15px;letter-spacing:2px}.start{margin-top:38px;padding:15px 38px;border:1px solid #c3a66c;background:#151d19;border-radius:4px;cursor:pointer;letter-spacing:3px;box-shadow:0 0 30px #d2b36a16}.start:active{transform:scale(.98)}
+/* game shell */
+#game{background:#0b1110}.top{height:70px;display:flex;align-items:center;justify-content:space-between;padding:0 18px;border-bottom:1px solid #514a38;background:#090e0dE8;backdrop-filter:blur(10px);position:relative;z-index:20}.brand{letter-spacing:3px}.brand small{display:block;color:#9c917d;letter-spacing:2px;font-size:10px;margin-top:4px}.hud{display:flex;gap:8px}.pill{border:1px solid #4e4a3b;border-radius:20px;padding:7px 11px;font-size:12px;background:#111713}.pill b{color:#d8bb75}
+.main{height:calc(100% - 70px);position:relative;overflow:hidden}.room{position:absolute;inset:0;display:none}.room.active{display:block}.scene{position:absolute;inset:0;background:#111}.roomTitle{position:absolute;left:22px;top:18px;z-index:5;text-shadow:0 2px 8px #000}.roomTitle h2{font-size:28px;font-weight:400;margin:0}.roomTitle p{margin:6px 0;color:#bcb5a7;font-size:13px}
+/* map */
+#map{background:radial-gradient(circle at 50% 45%,#31443a 0,#14231e 45%,#070c0b 100%)}.mapGrid{position:absolute;inset:0;padding:100px 6vw 45px;display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(2,1fr);gap:18px;max-width:1100px;margin:auto}.location{position:relative;border:1px solid #655b45;background:linear-gradient(145deg,#192720,#0d1512);border-radius:8px;cursor:pointer;overflow:hidden;box-shadow:0 15px 35px #0008;transition:.2s}.location:active{transform:scale(.98)}.location:hover{border-color:#bfa66c}.location .art{position:absolute;inset:0;opacity:.8}.library .art{background:radial-gradient(ellipse at 50% 20%,#7e6a43 0 2%,transparent 3%),linear-gradient(90deg,#261d16 0 12%,#6c5738 13% 18%,#1b1611 19% 30%,#6c5738 31% 36%,#1b1611 37% 55%,#6c5738 56% 61%,#1b1611 62% 100%)}.classroom .art{background:radial-gradient(circle at 50% 25%,#d0b873 0 2%,transparent 3%),linear-gradient(#1b2c29 0 55%,#3b2b1d 56%)}.potion .art{background:radial-gradient(circle at 40% 45%,#7c9b83 0 7%,transparent 8%),radial-gradient(circle at 65% 55%,#9c7440 0 5%,transparent 6%),linear-gradient(#17221e,#261d17)}.corridor .art{background:linear-gradient(90deg,#141d1b 0 18%,#574d39 19% 20%,#1a2421 21% 79%,#574d39 80% 81%,#141d1b 82%)}.forest .art{background:radial-gradient(circle at 50% 55%,#7b9577 0 3%,transparent 4%),linear-gradient(105deg,#08130f 0 20%,#193128 21% 35%,#06100d 36% 60%,#1b3026 61% 75%,#06100d 76%)}.tower .art{background:radial-gradient(circle at 70% 22%,#e9e2bd 0 5%,transparent 6%),linear-gradient(#091426,#172b45 58%,#080c0d 59%)}.location h3{position:absolute;left:18px;bottom:35px;margin:0;font-size:21px;font-weight:400;z-index:2}.location span{position:absolute;left:18px;bottom:15px;color:#aaa18f;font-size:11px;z-index:2}.lock{opacity:.45}.lock:after{content:"尚未解鎖";position:absolute;right:14px;top:13px;font-size:11px;color:#d2b877;z-index:3}
+/* common panel */
+.panel{position:absolute;background:#0a100ef0;border:1px solid #665a43;box-shadow:0 18px 55px #000b;border-radius:8px;padding:20px;z-index:8}.panel h3{margin:0 0 9px;font-weight:400;color:#d8bd79}.panel p{color:#c0baad;line-height:1.7;font-size:14px}.btn{border:1px solid #6b6048;background:#151d19;padding:10px 15px;border-radius:4px;cursor:pointer}.btn.gold{border-color:#bda66d}.btn:active{transform:translateY(1px)}.choices{display:flex;flex-wrap:wrap;gap:10px;margin-top:15px}.toast{position:absolute;left:50%;bottom:22px;transform:translateX(-50%) translateY(20px);opacity:0;transition:.25s;background:#080c0bf5;border:1px solid #8d774b;padding:10px 16px;border-radius:4px;z-index:50;pointer-events:none}.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+/* library */
+#library{background:linear-gradient(#101513aa,#0a0f0e),radial-gradient(ellipse at 50% 10%,#765d3d,#171510 42%,#070a09)}.shelves{position:absolute;inset:0;background:repeating-linear-gradient(90deg,transparent 0 7%,#5d4931 7.3% 7.7%,transparent 8% 15%);opacity:.7}.book{position:absolute;width:54px;height:90px;border:1px solid #d0b77655;background:#3a3325;cursor:pointer;box-shadow:0 7px 12px #0008}.book:nth-child(1){left:15%;top:28%}.book:nth-child(2){left:36%;top:48%}.book:nth-child(3){left:62%;top:30%}.book:nth-child(4){left:80%;top:55%}.book.found{box-shadow:0 0 20px #cdb66d;outline:1px solid #d6bd7a}.letter{display:none;inset:0;position:absolute;background:#050908dd;z-index:9;place-items:center}.letter.open{display:grid}.letterPaper{width:min(560px,86vw);background:#e7dcc2;color:#28241d;padding:35px;border-radius:2px;box-shadow:0 25px 70px #000;line-height:1.9}.letterPaper h3{text-align:center;font-weight:400;letter-spacing:4px}.letterPaper p{font-size:15px}.letterPaper strong{font-size:21px}.letterPaper .btn{color:#eee;background:#18211c;display:block;margin:18px auto 0}
+/* wand calibration */
+#wand{background:radial-gradient(circle at 50% 48%,#25352f,#0b1210 65%)}.wandArena{position:absolute;inset:0;display:grid;place-items:center}.target{width:min(60vw,380px);height:min(60vw,380px);border:1px solid #8e7a4f;border-radius:50%;position:relative;box-shadow:0 0 70px #9d824327}.target:before,.target:after{content:"";position:absolute;inset:12%;border:1px dashed #6f684f;border-radius:50%}.target:after{inset:31%}.orb{position:absolute;width:20px;height:20px;border-radius:50%;background:#d8c27e;box-shadow:0 0 30px #e1cc8a;left:calc(50% - 10px);top:calc(50% - 10px)}#wandCanvas{position:absolute;inset:0;width:100%;height:100%;touch-action:none}.spellHint{position:absolute;bottom:32px;left:50%;transform:translateX(-50%);color:#aaa08d;font-size:12px;text-align:center;z-index:5}.wandResult{position:absolute;left:50%;top:58%;transform:translate(-50%,-50%);font-size:20px;color:#d8bf7c;display:none;text-align:center}
+/* potion */
+#potion{background:linear-gradient(120deg,#151b18,#0c1110 55%,#19130d)}.cauldron{position:absolute;left:50%;top:48%;transform:translate(-50%,-50%);width:min(58vw,390px);height:min(58vw,390px);border-radius:50%;background:radial-gradient(circle at 50% 45%,#809c86 0 22%,#405b4e 23% 40%,#171c19 41%);border:10px solid #443b2c;box-shadow:0 35px 50px #000b}.ingredient{position:absolute;width:90px;height:90px;border:1px solid #6e6249;background:#111814;border-radius:8px;display:grid;place-items:center;cursor:pointer;color:#d3c59d;text-align:center}.ingredient[data-i="0"]{left:8%;top:35%}.ingredient[data-i="1"]{right:8%;top:27%}.ingredient[data-i="2"]{left:15%;bottom:17%}.ingredient[data-i="3"]{right:15%;bottom:13%}.ingredient.used{opacity:.3;pointer-events:none}.potionStatus{position:absolute;left:50%;bottom:28px;transform:translateX(-50%);color:#bcb3a0;font-size:13px}
+/* corridor chase */
+#corridor{background:linear-gradient(90deg,#080d0c,#202923 50%,#080d0c)}.floor{position:absolute;left:10%;right:10%;bottom:0;height:48%;background:linear-gradient(165deg,transparent 0 48%,#352d21 49% 52%,#151714 53%)}.portrait{position:absolute;width:115px;height:145px;border:6px solid #806d47;background:linear-gradient(#51493a,#151613);display:grid;place-items:center;color:#d2c59f;font-size:30px;cursor:pointer;box-shadow:0 12px 25px #0008}.portrait:nth-of-type(1){left:14%;top:25%}.portrait:nth-of-type(2){left:42%;top:18%}.portrait:nth-of-type(3){right:15%;top:29%}.shadow{position:absolute;width:80px;height:170px;border-radius:50% 50% 10% 10%;background:radial-gradient(ellipse at 50% 25%,#b5d8cb 0 3%,#0c1110 8% 70%,transparent 71%);filter:drop-shadow(0 0 15px #9bd3c755);cursor:pointer;transition:.2s}.shadow.run{animation:run 1.4s linear infinite}@keyframes run{0%{left:15%;top:45%}50%{left:65%;top:37%}100%{left:88%;top:45%}}
+/* forest */
+#forest{background:radial-gradient(ellipse at 50% 65%,#314c3b,#0b1611 60%,#050907)}.path{position:absolute;bottom:0;width:55%;height:80%;left:22%;background:linear-gradient(150deg,transparent 0 35%,#5d5a40 36% 40%,#272b20 41% 100%);clip-path:polygon(35% 0,65% 0,100% 100%,0 100%);opacity:.9}.tree{position:absolute;bottom:15%;width:35px;height:70%;background:#101712;border-radius:50% 50% 0 0}.tree:nth-child(1){left:7%}.tree:nth-child(2){left:23%;height:62%}.tree:nth-child(3){right:18%;height:70%}.tree:nth-child(4){right:5%;height:55%}.forestChoice{position:absolute;left:50%;bottom:25px;transform:translateX(-50%);display:flex;gap:9px;z-index:5}.track{position:absolute;width:28px;height:28px;border-radius:50%;background:#d8e5d7;box-shadow:0 0 18px #bde1c7;opacity:0}.track.show{opacity:1}
+/* duel */
+#duel{background:radial-gradient(circle at 50% 45%,#34443d,#0b1110 62%)}.duelTitle{text-align:center;margin-top:80px}.duelTitle h2{font-size:32px;font-weight:400}.duelants{position:absolute;left:8%;right:8%;top:32%;display:flex;justify-content:space-between;align-items:center}.mage{width:130px;height:210px;position:relative}.mage:before{content:"";position:absolute;left:35px;top:0;width:60px;height:60px;border-radius:50%;background:#bba98c}.mage:after{content:"";position:absolute;left:18px;top:52px;width:94px;height:145px;border-radius:48% 48% 10% 10%;background:#1a2621;border:1px solid #5d674f}.wandline{position:absolute;top:95px;width:180px;height:2px;background:#cbb66e;box-shadow:0 0 20px #d9c276}.leftW{left:22%}.rightW{right:22%;transform:rotate(180deg)}.shield{position:absolute;left:50%;top:54%;transform:translate(-50%,-50%);width:100px;height:100px;border:1px solid #cbb66e;border-radius:50%;opacity:.2}.shield.hit{animation:shield .45s}@keyframes shield{0%{transform:translate(-50%,-50%) scale(.8);opacity:.9}100%{transform:translate(-50%,-50%) scale(1.5);opacity:0}}.duelControls{position:absolute;bottom:30px;left:50%;transform:translateX(-50%);display:flex;gap:12px}.duelControls .btn{min-width:110px}.duelLog{position:absolute;top:68%;left:50%;transform:translateX(-50%);color:#d5c38e;font-size:13px;text-align:center}
+/* tower */
+#tower{background:radial-gradient(circle at 75% 18%,#f1e8bd 0 3%,transparent 4%),linear-gradient(#071426,#13243a 62%,#060a0a)}.stars{position:absolute;inset:0;background-image:radial-gradient(circle,#dfe5da 0 1px,transparent 1.5px);background-size:90px 75px;opacity:.7}.constellation{position:absolute;left:50%;top:45%;width:330px;height:230px;transform:translate(-50%,-50%);border:1px solid #71809355}.starDot{position:absolute;width:12px;height:12px;border-radius:50%;background:#eef1da;box-shadow:0 0 18px #e5e6bc}.starDot:nth-child(1){left:15%;top:52%}.starDot:nth-child(2){left:34%;top:27%}.starDot:nth-child(3){left:54%;top:45%}.starDot:nth-child(4){left:72%;top:18%}.starDot:nth-child(5){left:84%;top:63%}.starLine{position:absolute;height:1px;background:#b7c6bc88;transform-origin:left}.sl1{width:105px;left:17%;top:51%;transform:rotate(-31deg)}.sl2{width:80px;left:36%;top:29%;transform:rotate(29deg)}.sl3{width:85px;left:55%;top:46%;transform:rotate(-38deg)}.sl4{width:105px;left:73%;top:20%;transform:rotate(51deg)}.code{position:absolute;bottom:25px;left:50%;transform:translateX(-50%);display:flex;gap:8px}.code button{width:58px;height:52px;border:1px solid #81734f;background:#0b1419;border-radius:4px;cursor:pointer}.code button:hover{border-color:#d1b76c}.codeDisplay{position:absolute;left:50%;top:72%;transform:translateX(-50%);font-size:26px;letter-spacing:10px;color:#d9c17b}
+/* finale */
+#final{background:#020605}.finalImage{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;filter:brightness(.55) saturate(1.2)}.finalGlow{position:absolute;inset:0;background:radial-gradient(circle at 50% 48%,transparent 0 20%,#02060577 52%,#020605 100%)}.finalText{position:absolute;left:50%;top:12%;transform:translateX(-50%);text-align:center;z-index:5;text-shadow:0 2px 12px #000}.finalText .small{font-size:12px;letter-spacing:5px;color:#c9b578}.finalText h1{font-size:clamp(35px,7vw,68px);font-weight:400;letter-spacing:10px;margin:15px 0}.finalText p{font-size:18px;color:#e9e3d7}.fire{position:absolute;inset:0;pointer-events:none;overflow:hidden}.spark{position:absolute;width:4px;height:4px;background:#f0d889;border-radius:50%;animation:burst 1.8s ease-out forwards;box-shadow:0 0 12px #f2d77f}@keyframes burst{from{transform:translate(0,0) scale(1);opacity:1}to{transform:translate(var(--x),var(--y)) scale(0);opacity:0}}
+@media(max-width:700px){.mapGrid{padding:90px 12px 25px;gap:10px}.location h3{font-size:16px}.location span{font-size:9px}.panel{left:12px!important;right:12px!important;width:auto!important}.top{height:64px}.main{height:calc(100% - 64px)}.roomTitle{left:15px;top:12px}.roomTitle h2{font-size:23px}.duelants{top:34%}.mage{transform:scale(.75)}.wandline{width:100px}.leftW{left:25%}.rightW{right:25%}.code button{width:52px}.finalText{top:8%}}
 </style>
 </head>
 <body>
 <div id="app">
 <section id="intro" class="screen active">
-<div class="introCard">
-<div class="crest">✦</div>
-<div class="kicker">HOGWARTS · MIDNIGHT CASE</div>
-<h1>失控的護法</h1><h2>吳悠的 10 / 24 午夜事件</h2>
-<p class="introStory">今晚 <strong>23:47</strong>，霍格華茲的鐘聲沒有響。<br>一封沒有署名的邀請函卻出現在城堡中央。<br><br>更奇怪的是——<strong>有一道銀光正在城堡裡移動。</strong><br>你只有一個晚上，找出它為什麼一直在找吳悠。</p>
-<button class="primary" id="start">進入城堡</button>
-</div></section>
-
-<section id="game" class="screen">
-<header class="top"><div class="brand">吳悠的霍格華茲<small>THE MIDNIGHT CASE</small></div><div class="time"><span id="clock">23:47</span><small>城堡時間</small></div><div class="stats"><div class="stat">線索<b id="clueCount">0 / 6</b></div><div class="stat">魔力<b id="energy">3</b></div></div></header>
-<main class="main"><div class="mapWrap"><div class="map">
-<div class="path p1"></div><div class="path p2"></div><div class="path p3"></div><div class="path p4"></div>
-<div class="room r1" data-room="library"><div class="sigil">▤</div><div class="rname">圖書館</div><div class="sub">異常書頁</div></div>
-<div class="room r2" data-room="defense"><div class="sigil">◇</div><div class="rname">黑魔法防禦術教室</div><div class="sub">魔法校準</div></div>
-<div class="room r3" data-room="corridor"><div class="sigil">⌁</div><div class="rname">畫像走廊</div><div class="sub">銀影出沒</div></div>
-<div class="room r4" data-room="potions"><div class="sigil">◒</div><div class="rname">魔藥學教室</div><div class="sub">記憶藥水</div></div>
-<div class="room r5" data-room="forest"><div class="sigil">♧</div><div class="rname">禁忌森林</div><div class="sub">追蹤銀光</div></div>
-<div class="room r6" data-room="tower"><div class="sigil">△</div><div class="rname">天文塔</div><div class="sub">最終觀測</div></div>
-<div class="room r7" data-room="hall"><div class="sigil">⌂</div><div class="rname">大廳</div><div class="sub">午夜鐘聲</div></div>
-</div></div>
-<aside class="side"><div class="sideHead">探險紀錄</div><div id="log"></div></aside></main>
-<footer class="bottom"><span>不要急著找答案。注意每一次回到房間時，城堡有沒有改變。</span><button id="reset">重新開始</button></footer>
+  <div class="sigil">✦</div><div class="eyebrow">HOGWARTS · 24 OCTOBER</div>
+  <div class="introTitle">午夜生日事件</div><div class="introSub">吳悠，你今晚收到的不是普通的生日信。</div>
+  <button class="start" id="startBtn">拆開信封</button>
 </section>
-
-<div id="modal"><div class="modalCard"><div class="modalHead"><h2 id="modalTitle"></h2><button class="close" id="close">×</button></div><div class="modalBody" id="modalBody"></div></div></div>
-<div id="toast"></div>
-
-<section id="ending" class="screen"><div class="endbg"></div><div class="fire" id="fire"></div><div class="endContent"><img class="endImg" src="PATRONUS_DOLPHIN.png" alt="銀藍色海豚護法"></div><div class="endTitle">護法現身</div><div class="endSub">吳悠的護法——海豚<br><br>生日快樂，吳悠。願你在黑暗裡，永遠找得到自己的光。</div><button class="restart" id="endRestart">再玩一次</button></section>
+<section id="game" class="screen">
+  <header class="top"><div class="brand">霍格華茲 · 午夜事件<small>吳悠的生日任務</small></div><div class="hud"><div class="pill">線索 <b id="clueCount">0/6</b></div><div class="pill">能量 <b id="energy">3</b></div></div></header>
+  <div class="main">
+    <div id="map" class="room active">
+      <div class="roomTitle"><h2>城堡地圖</h2><p>你可以自由選擇下一步。部分地方會在事件發生後改變。</p></div>
+      <div class="mapGrid">
+        <div class="location library" data-go="library"><div class="art"></div><h3>圖書館</h3><span>找出寄信的人</span></div>
+        <div class="location classroom" data-go="wand"><div class="art"></div><h3>黑魔法防禦術教室</h3><span>校準魔杖</span></div>
+        <div class="location potion" data-go="potion"><div class="art"></div><h3>魔藥學教室</h3><span>調出銀藍藥水</span></div>
+        <div class="location corridor" data-go="corridor"><div class="art"></div><h3>畫像走廊</h3><span>追上那個影子</span></div>
+        <div class="location forest" data-go="forest"><div class="art"></div><h3>禁忌森林</h3><span>追蹤湖邊銀光</span></div>
+        <div class="location tower lock" data-go="tower"><div class="art"></div><h3>天文塔</h3><span>集齊六個線索後開啟</span></div>
+      </div>
+    </div>
+    <div id="library" class="room">
+      <div class="shelves"></div><div class="roomTitle"><h2>圖書館</h2><p>某一本書的書脊正在微微發光。</p></div>
+      <div class="book" data-book="0"></div><div class="book" data-book="1"></div><div class="book" data-book="2"></div><div class="book" data-book="3"></div>
+      <div class="panel" style="left:22px;bottom:22px;width:min(420px,calc(100% - 44px))"><h3>調查</h3><p id="libraryMsg">點擊你覺得可疑的書。找錯不會扣分，但會浪費一點時間。</p><button class="btn" data-map>回到地圖</button></div>
+      <div id="letter" class="letter"><div class="letterPaper"><h3>沒有署名的信</h3><p>吳悠：</p><p>今晚 11:59 前，城堡會替你保管一樣只有你能喚醒的東西。</p><p>第一個提示藏在<strong>「生日」</strong>之後，而不是之前。</p><p>別相信第一眼看到的答案。</p><button class="btn gold" id="closeLetter">記住這個線索</button></div></div>
+    </div>
+    <div id="wand" class="room">
+      <div class="roomTitle"><h2>黑魔法防禦術教室</h2><p>魔杖校準：沿著銀色光點畫出完整的護法軌跡。</p></div>
+      <div class="wandArena"><div class="target"><div class="orb"></div></div></div><canvas id="wandCanvas"></canvas><div class="spellHint">不要點擊光球。用手指／觸控筆畫一圈，再回到起點。</div><div id="wandResult" class="wandResult">魔杖已校準。<br>你感覺到某種水聲。</div>
+      <div class="panel" style="right:22px;bottom:22px"><button class="btn" id="wandReset">重新畫</button> <button class="btn gold" id="wandDone">完成校準</button> <button class="btn" data-map>回地圖</button></div>
+    </div>
+    <div id="potion" class="room">
+      <div class="roomTitle"><h2>魔藥學教室</h2><p>不要照著直覺。觀察液面反應，找出真正的三種材料。</p></div><div class="cauldron"></div>
+      <div class="ingredient" data-i="0">月長石</div><div class="ingredient" data-i="1">銀葉草</div><div class="ingredient" data-i="2">珍珠粉</div><div class="ingredient" data-i="3">火蜥蜴粉</div>
+      <div class="potionStatus" id="potionStatus">已加入：—</div>
+      <div class="panel" style="right:22px;bottom:22px"><button class="btn" id="potionReset">倒掉重來</button> <button class="btn" data-map>回地圖</button></div>
+    </div>
+    <div id="corridor" class="room">
+      <div class="roomTitle"><h2>畫像走廊</h2><p>銀色影子正在移動。點擊畫像，問出它最後看見的方向。</p></div><div class="floor"></div>
+      <div class="portrait" data-dir="左">Ⅰ</div><div class="portrait" data-dir="前">Ⅱ</div><div class="portrait" data-dir="右">Ⅲ</div><div id="shadow" class="shadow run"></div>
+      <div class="panel" style="left:22px;bottom:22px;width:min(450px,calc(100% - 44px))"><h3 id="portraitMsg">三幅畫像似乎都知道一點。</h3><p>找到正確的方向後，影子會留下東西。</p><button class="btn" data-map>回地圖</button></div>
+    </div>
+    <div id="forest" class="room">
+      <div class="roomTitle"><h2>禁忌森林</h2><p>霧裡有三條路。只有一條通往黑湖。</p></div><div class="path"></div><div class="tree"></div><div class="tree"></div><div class="tree"></div><div class="tree"></div>
+      <div class="track" id="track"></div>
+      <div class="forestChoice"><button class="btn" data-path="1">有螢火蟲的路</button><button class="btn" data-path="2">有水聲的路</button><button class="btn" data-path="3">有腳印的路</button></div>
+      <div class="panel" id="forestPanel" style="left:50%;top:62%;transform:translateX(-50%);width:min(500px,calc(100% - 40px));display:none"><h3 id="forestTitle">—</h3><p id="forestMsg">—</p><button class="btn gold" id="forestContinue">繼續追蹤</button></div>
+    </div>
+    <div id="duel" class="room">
+      <div class="duelTitle"><h2>走廊盡頭</h2><p>銀色影子終於停下。不是戰鬥到底，而是抓準時機。</p></div><div class="duelants"><div class="mage"></div><div class="mage"></div></div><div class="wandline leftW"></div><div class="wandline rightW"></div><div id="shield" class="shield"></div><div class="duelLog" id="duelLog">對方要施法了……</div><div class="duelControls"><button class="btn" id="defend">防禦</button><button class="btn" id="counter">繳械</button><button class="btn" data-map>離開</button></div>
+    </div>
+    <div id="tower" class="room">
+      <div class="stars"></div><div class="roomTitle"><h2>天文塔</h2><p>六個線索拼成一組星圖。輸入你認為的生日密令。</p></div><div class="constellation"><div class="starDot"></div><div class="starDot"></div><div class="starDot"></div><div class="starDot"></div><div class="starDot"></div><div class="starLine sl1"></div><div class="starLine sl2"></div><div class="starLine sl3"></div><div class="starLine sl4"></div></div><div class="codeDisplay" id="codeDisplay">— — — —</div><div class="code"><button data-num="1">1</button><button data-num="0">0</button><button data-num="2">2</button><button data-num="4">4</button><button data-num="8">8</button><button id="codeClear">清除</button></div>
+    </div>
+  </div><div class="toast" id="toast"></div>
+</section>
+<section id="final" class="screen"><img class="finalImage" src="PATRONUS_DOLPHIN.png" alt="銀藍色海豚護法"><div class="finalGlow"></div><div class="finalText"><div class="small">EXPECTO PATRONUM · 吳悠</div><h1>護法現身</h1><p>你的護法是——海豚</p><p>生日快樂，吳悠。</p></div><div class="fire" id="fire"></div></section>
 </div>
 <script>
 const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
-let state={clues:[],energy:3,time:47,visits:{},flags:{},route:[],foundBooks:0,potionStep:0,stars:[]};
-const clueNames={invite:"銀色邀請函",rune:"護法咒痕跡",potion:"記憶中的生日",shadow:"銀影的方向",fin:"湖面的銀色鰭痕",constellation:"10／24 星圖"};
-function log(msg,cls=""){let d=document.createElement("div");d.className="logitem "+cls;d.innerHTML=msg;$("#log").prepend(d)}
-function toast(t){let x=$("#toast");x.textContent=t;x.classList.add("toastShow");setTimeout(()=>x.classList.remove("toastShow"),1800)}
-function addClue(k){if(state.clues.includes(k))return;state.clues.push(k);$("#clueCount").textContent=state.clues.length+" / 6";log("發現線索：<b>"+clueNames[k]+"</b>","clue");toast("取得線索："+clueNames[k]);updateRooms()}
-function spend(n=1){state.energy=Math.max(0,state.energy-n);$("#energy").textContent=state.energy}
-function advance(n=2){state.time+=n;if(state.time>=60){state.time-=60;advanceHour()} $("#clock").textContent="23:"+String(state.time).padStart(2,"0")}
-function advanceHour(){log("城堡的鐘聲在遠處震動。某些房間已經改變。","danger")}
-function openModal(title,body){$("#modalTitle").textContent=title;$("#modalBody").innerHTML=body;$("#modal").classList.add("open")}
-function closeModal(){$("#modal").classList.remove("open")}
-function updateRooms(){$$(".room").forEach(r=>{let n=r.dataset.room;r.classList.toggle("done",state.visits[n]>0);r.classList.toggle("event",n==="corridor"&&!state.flags.shadowSeen);r.classList.toggle("locked",n==="tower"&&state.clues.length<5)})}
-function startGame(){state={clues:[],energy:3,time:47,visits:{},flags:{},route:[],foundBooks:0,potionStep:0,stars:[]};$("#intro").classList.remove("active");$("#game").classList.add("active");$("#log").innerHTML="";$("#clueCount").textContent="0 / 6";$("#energy").textContent="3";$("#clock").textContent="23:47";log("<b>23:47</b>　你踏進大廳。銀色光點從樓梯上方一閃而過。");log("提示：你可以自由選擇房間。某些事件會因為你的前一次選擇而改變。");updateRooms()}
-$("#start").onclick=startGame;$("#reset").onclick=startGame;$("#endRestart").onclick=startGame;$("#close").onclick=closeModal;$("#modal").addEventListener("click",e=>{if(e.target.id==="modal")closeModal()});
-$$(".room").forEach(r=>r.addEventListener("click",()=>room(r.dataset.room)));
-function room(n){
- if(n==="tower"&&state.clues.length<5){toast("天文塔的門沒有打開……還少了一些線索。");return}
- state.visits[n]=(state.visits[n]||0)+1;state.route.push(n);advance(1);updateRooms();
- if(n==="library")library(); if(n==="defense")defense(); if(n==="corridor")corridor(); if(n==="potions")potions(); if(n==="forest")forest(); if(n==="tower")tower(); if(n==="hall")hall();
+const state={clues:new Set(),energy:3,wand:false,potion:false,portrait:false,forest:false,duel:false,code:"",books:0};
+const clueNames={letter:"銀色邀請函",wand:"護法咒痕跡",potion:"銀藍藥水",portrait:"畫像口供",forest:"黑湖銀光",duel:"影子的魔杖"};
+function show(id){$$('.room').forEach(x=>x.classList.remove('active'));$('#'+id).classList.add('active');update();}
+function toast(t){const e=$('#toast');e.textContent=t;e.classList.add('show');clearTimeout(window.tt);window.tt=setTimeout(()=>e.classList.remove('show'),1800)}
+function addClue(k){if(state.clues.has(k))return;state.clues.add(k);toast('獲得線索：'+clueNames[k]);update()}
+function update(){
+ $('#clueCount').textContent=state.clues.size+'/6';$('#energy').textContent=state.energy;
+ const tower=$('[data-go="tower"]'); if(state.clues.size>=6)tower.classList.remove('lock');
 }
-function library(){
- if(state.flags.libraryDone){openModal("圖書館｜再次調查",`<p class="desc">你回到原本的書架。那本書已經不在了，只剩一小片銀色紙屑。</p><div class="choice" onclick="closeModal();log('你把紙屑收進口袋。');">收下紙屑</div>`);return}
- openModal("圖書館｜找出不該存在的書頁",`<p class="desc">六本書看起來完全正常。但其中一本的書脊年份與其他五本不同。<br>找出它。錯一次會讓書架重新排列。</p><div class="bookGrid">${["1742","1824","1891","1924","1998","2024"].map((x,i)=>`<button class="book" data-i="${i}">魔法史 · ${x}</button>`).join("")}</div><p id="bookMsg" class="potionMsg">剩餘嘗試：3</p>`);
- let tries=3; $$(".book").forEach((b,i)=>b.onclick=()=>{if(i===5){b.classList.add("found");state.flags.libraryDone=true;addClue("invite");closeModal();log("書頁夾著一封没有署名的銀色邀請函。","clue");}else{tries--;b.style.opacity=".35";$("#bookMsg").textContent="剩餘嘗試："+tries;if(tries<=0){spend(1);toast("書架重新排列了。你失去 1 點魔力。");closeModal()}}});
-}
-function defense(){
- if(state.flags.defenseDone){openModal("黑魔法防禦術｜殘留咒痕",`<p class="desc">牆上的咒痕正在閃爍。它和你的魔杖頻率已經同步。</p><div class="choice" onclick="closeModal()">記下這個頻率</div>`);return}
- openModal("黑魔法防禦術｜魔法校準",`<p class="desc">銀光留下了一道奇怪的咒痕。用魔杖在下方畫出「雙弧」：先向右，再向左，不要離開畫布。</p><canvas id="runeCanvas" class="runeCanvas"></canvas><p class="runeHint">畫完後鬆開手指。需要連續的筆畫。</p><button class="primary" id="runeDone">完成校準</button>`);
- const c=$("#runeCanvas"),ctx=c.getContext("2d");let d=devicePixelRatio||1;c.width=c.clientWidth*d;c.height=c.clientHeight*d;ctx.scale(d,d);let drawing=false,pts=[];
- function pos(e){let r=c.getBoundingClientRect();return{x:e.clientX-r.left,y:e.clientY-r.top}}
- c.onpointerdown=e=>{e.preventDefault();drawing=true;pts=[pos(e)];ctx.beginPath();ctx.moveTo(pts[0].x,pts[0].y)};c.onpointermove=e=>{if(!drawing)return;e.preventDefault();let p=pos(e);pts.push(p);ctx.lineWidth=3;ctx.lineCap="round";ctx.strokeStyle="#c9b26b";ctx.lineTo(p.x,p.y);ctx.stroke()};window.onpointerup=()=>drawing=false;
- $("#runeDone").onclick=()=>{if(pts.length>30){state.flags.defenseDone=true;addClue("rune");closeModal();log("咒痕在你的筆尖下亮起：它不是攻擊魔法，是召喚魔法。","clue")}else toast("魔法軌跡太短，再試一次。")};
-}
-function potions(){
- if(state.flags.potionDone){openModal("魔藥學｜空瓶",`<p class="desc">桌上只剩一只空瓶。瓶底刻著兩個數字：<b>10 / 24</b>。</p><div class="choice" onclick="closeModal()">記住它</div>`);return}
- openModal("魔藥學｜調製記憶藥水",`<p class="desc">教授留下的便條只有一句：「不要從最亮的材料開始。」<br>三種材料會在正確順序下變成銀藍色。</p><div class="cauldron" id="cauldron">等待材料</div><div class="ingredients"><button class="ingredient" data-v="moon">月長石</button><button class="ingredient" data-v="leaf">銀葉草</button><button class="ingredient" data-v="pearl">珍珠粉</button></div><p id="potMsg" class="potionMsg">目前順序：—</p>`);
- let seq=["moon","leaf","pearl"],step=0;$$(".ingredient").forEach(b=>b.onclick=()=>{if(b.classList.contains("used"))return;let v=b.dataset.v;if(v===seq[step]){b.classList.add("used");step++;$("#potMsg").textContent="目前順序："+["月長石","銀葉草","珍珠粉"].slice(0,step).join(" → ");$("#cauldron").textContent=step===3?"銀藍色":"反應中……";if(step===3){state.flags.potionDone=true;addClue("potion");setTimeout(closeModal,500);log("藥水讓你看見一段記憶：有人在 10 月 24 日等待一個護法。","clue")}}else{spend(1);step=0;$$(".ingredient").forEach(x=>x.classList.remove("used"));$("#potMsg").textContent="順序錯了。魔力 -1。重新開始。"}})
-}
-function corridor(){
- if(state.flags.shadowSeen){openModal("畫像走廊｜銀影回聲",`<p class="desc">那道影子已經不在了，但牆上的畫像都看向同一個方向：禁忌森林。</p><div class="choice" onclick="closeModal();log('畫像們同時指向禁忌森林。');">前往禁忌森林</div>`);return}
- openModal("畫像走廊｜攔截銀影",`<p class="desc">燈一盞接一盞熄滅。銀影會從走廊穿過三次。<br><b>只有影子真正出現的瞬間按下「封住」。</b></p><div class="timing"><div class="bar" id="bar"></div></div><button class="defend" id="defend">封住</button><p id="timingMsg" class="potionMsg">準備……</p>`);
- let t=0,go=true,bar=$("#bar"),btn=$("#defend");btn.disabled=true;
- let timer=setInterval(()=>{if(!go)return;t+=2;bar.style.width=t+"%";if(t>=100){t=0;bar.style.width="0%"}},40);
- setTimeout(()=>{btn.disabled=false;$("#timingMsg").textContent="現在！";},850);
- btn.onclick=()=>{if(t>=55&&t<=90){go=false;clearInterval(timer);state.flags.shadowSeen=true;addClue("shadow");closeModal();log("你沒有攻擊它。你只是讓銀影停了一秒——它朝森林方向逃走。","clue")}else{spend(1);toast("太早了！銀影穿過你身邊。魔力 -1。");clearInterval(timer);closeModal()}};
-}
-function forest(){
- if(state.flags.forestDone){openModal("禁忌森林｜湖邊",`<p class="desc">湖面很安靜。月光下，水裡似乎有什麼在等待。</p><div class="choice" onclick="closeModal();towerHint()">靠近湖面</div>`);return}
- openModal("禁忌森林｜追蹤銀光",`<p class="desc">你看到三條路。銀光不一定在最亮的那條。選擇一條追蹤。</p><div class="choices"><button class="choice" onclick="forestPath(0)"><strong>左邊：月光草地</strong><span>光很多，腳印卻很少。</span></button><button class="choice" onclick="forestPath(1)"><strong>中間：黑松林</strong><span>幾乎沒有光，只聽得到水聲。</span></button><button class="choice" onclick="forestPath(2)"><strong>右邊：湖畔小徑</strong><span>有一條很細的銀色痕跡。</span></button></div>`);
-}
-function forestPath(i){if(i===2){state.flags.forestDone=true;addClue("fin");closeModal();log("湖面下閃過一條尾鰭。那不是普通的生物——它在等你。","clue")}else{spend(1);toast("你走錯了。銀光消失，魔力 -1。");closeModal()}}
-function towerHint(){if(state.clues.length>=5)tower();else toast("湖面上的線索還不完整。")}
-function hall(){
- if(!state.flags.hallDone){state.flags.hallDone=true;openModal("大廳｜午夜前的選擇",`<p class="desc">你回到大廳。那封邀請函背面浮出一句話：</p><p style="text-align:center;color:#dfce8c;font-size:17px">「真正的護法，不是你命令它出現，而是它知道你需要它。」</p><div class="choices"><button class="choice" onclick="chooseRoute('follow');"><strong>相信銀光，跟著它走</strong><span>你願意相信未知。</span></button><button class="choice" onclick="chooseRoute('observe');"><strong>先停下來觀察</strong><span>你選擇在行動前理解它。</span></button></div>`)}else{log("大廳已經安靜下來。你聽見很遠的水聲。");toast("水聲從天文塔方向傳來。")}}
-function chooseRoute(x){state.flags.route=x;state.route.push(x);closeModal();log(x==="follow"?"你跟著銀光走，它沒有逃跑。":"你停下來，銀光也停下來。它似乎在等你。","ok");advance(2)}
-function tower(){
- if(state.flags.constDone){finale();return}
- openModal("天文塔｜10／24 星圖",`<p class="desc">最後一張星圖沒有文字。五顆星被一條看不見的線連著。<br>請依序點亮它們：<b>左 → 上左 → 中 → 右上 → 右下</b>。</p><div class="constellation"><button class="star s1" data-i="0"></button><button class="star s2" data-i="1"></button><button class="star s3" data-i="2"></button><button class="star s4" data-i="3"></button><button class="star s5" data-i="4"></button></div><p id="starMsg" class="potionMsg">星圖：—</p>`);
- let seq=[0,1,2,3,4],step=0;$$(".star").forEach(s=>s.onclick=()=>{let i=+s.dataset.i;if(i===seq[step]){s.classList.add("sel");step++;$("#starMsg").textContent="星圖："+step+" / 5";if(step===5){state.flags.constDone=true;addClue("constellation");closeModal();log("五顆星連成了「10／24」。最後的魔法不是密碼，而是一個生日。","clue");setTimeout(finale,700)}}else{spend(1);step=0;$$(".star").forEach(x=>x.classList.remove("sel"));$("#starMsg").textContent="星圖斷裂。魔力 -1。"}})
-}
-function finale(){if(state.clues.length<5){toast("天文塔的星圖還不完整。");return} if(state.clues.length===5){openModal("天文塔｜最後一道門",`<p class="desc">六個位置只差最後一個。你已經知道銀光、邀請函、記憶、森林和星圖都在指向同一件事。</p><p style="text-align:center;color:#ddce91;font-size:19px">你要召喚護法嗎？</p><div class="choices"><button class="choice" onclick="summon()"><strong>「疾疾，護法現身。」</strong><span>舉起魔杖，讓真正的魔法回應你。</span></button></div>`)}else summon()}
-function summon(){closeModal();$("#game").classList.remove("active");$("#ending").classList.add("active");let f=$("#fire");f.innerHTML="";for(let i=0;i<70;i++){let s=document.createElement("i");s.className="spark";s.style.left=(45+Math.random()*10)+"%";s.style.top=(45+Math.random()*10)+"%";s.style.setProperty("--x",(Math.random()*260-130)+"px");s.style.setProperty("--y",(Math.random()*220-150)+"px");s.style.animationDelay=(Math.random()*.9)+"s";f.appendChild(s)}}
+$('#startBtn').onclick=()=>{show('map');};
+$$('[data-map]').forEach(b=>b.onclick=()=>show('map'));
+$$('.location').forEach(l=>l.onclick=()=>{const g=l.dataset.go;if(g==='tower'&&state.clues.size<6){toast('天文塔還沒有對你開門。');return}show(g)});
+/* library */
+$$('.book').forEach(b=>b.onclick=()=>{const i=+b.dataset.book;if(b.classList.contains('found'))return;b.classList.add('found');state.books++;if(state.books===1){$('#libraryMsg').textContent='這本書裡沒有文字，只有一張被撕下的星圖角落。';}if(state.books===2){$('#libraryMsg').textContent='第二本書的書頁溫度異常，背面寫著「10 不是起點」。';}if(state.books===3){$('#libraryMsg').textContent='第三本書夾著一封信。';$('#letter').classList.add('open')}if(state.books===4){$('#libraryMsg').textContent='你找到最後一本：書脊上的水滴圖案和剛才的星圖完全吻合。'}});
+$('#closeLetter').onclick=()=>{$('#letter').classList.remove('open');addClue('letter')};
+/* wand */
+const wc=$('#wandCanvas'),ctx=wc.getContext('2d');let drawing=false,pts=[];
+function resizeW(){const r=wc.getBoundingClientRect(),d=devicePixelRatio||1;wc.width=r.width*d;wc.height=r.height*d;ctx.setTransform(d,0,0,d,0,0);drawW()};
+function pos(e){const r=wc.getBoundingClientRect();return{x:e.clientX-r.left,y:e.clientY-r.top}}
+function drawW(){ctx.clearRect(0,0,wc.clientWidth,wc.clientHeight);if(pts.length<2)return;ctx.strokeStyle='#d7c27c';ctx.lineWidth=3;ctx.lineCap='round';ctx.lineJoin='round';ctx.beginPath();ctx.moveTo(pts[0].x,pts[0].y);pts.slice(1).forEach(p=>ctx.lineTo(p.x,p.y));ctx.stroke()}
+wc.onpointerdown=e=>{e.preventDefault();drawing=true;pts=[pos(e)]};wc.onpointermove=e=>{if(!drawing)return;e.preventDefault();pts.push(pos(e));drawW()};window.addEventListener('pointerup',()=>drawing=false);window.addEventListener('resize',resizeW);resizeW();
+$('#wandReset').onclick=()=>{pts=[];drawW();$('#wandResult').style.display='none'};
+$('#wandDone').onclick=()=>{if(pts.length<35){toast('軌跡太短，再畫完整一點。');return}const a=pts[0],z=pts[pts.length-1];const dist=Math.hypot(a.x-z.x,a.y-z.y);if(dist>120){toast('沒有回到起點，魔法軌跡斷掉了。');return}state.wand=true;addClue('wand');$('#wandResult').style.display='block';setTimeout(()=>show('map'),1400)};
+/* potion */
+let pot=[];function potUpdate(){$('#potionStatus').textContent='已加入：'+(pot.length?pot.map(i=>['月長石','銀葉草','珍珠粉','火蜥蜴粉'][i]).join(' → '):'—')}
+$$('.ingredient').forEach(b=>b.onclick=()=>{if(state.potion)return;const i=+b.dataset.i;pot.push(i);b.classList.add('used');potUpdate();if(i===3||pot.length>3){toast('藥水冒出黑煙，順序不對。');state.energy=Math.max(0,state.energy-1);setTimeout(()=>{$$('.ingredient').forEach(x=>x.classList.remove('used'));pot=[];potUpdate()},500)}else if(pot.join(',')==='0,1,2'){state.potion=true;addClue('potion');toast('銀藍色藥水完成！');setTimeout(()=>show('map'),1300)}});
+$('#potionReset').onclick=()=>{$$('.ingredient').forEach(x=>x.classList.remove('used'));pot=[];potUpdate()};
+/* portrait */
+$$('.portrait').forEach(p=>p.onclick=()=>{const d=p.dataset.dir;if(d==='前'){state.portrait=true;$('#portraitMsg').textContent='Ⅱ號畫像低聲說：「它沒有往左，也沒有往右……它去了你看不見的地方。」';addClue('portrait');$('#shadow').classList.remove('run');$('#shadow').style.left='47%';$('#shadow').style.top='42%'}else{$('#portraitMsg').textContent='這幅畫像搖頭：「不對。它最後一次出現不是這個方向。」';toast('方向不對')}});
+/* forest */
+$$('[data-path]').forEach(b=>b.onclick=()=>{const p=b.dataset.path;$('#forestPanel').style.display='block';if(p==='2'){state.forest=true;$('#forestTitle').textContent='你找到了黑湖';$('#forestMsg').textContent='霧散開的一瞬間，一道銀光掠過湖面。水下留下像魚鰭又像月牙的痕跡。';$('#track').classList.add('show');addClue('forest')}else if(p==='1'){$('#forestTitle').textContent='螢火蟲帶你繞了一圈';$('#forestMsg').textContent='很漂亮，但你回到了原地。你聽見水聲從另一條路傳來。'}else{$('#forestTitle').textContent='腳印突然消失';$('#forestMsg').textContent='這些腳印不是人的。你最好換路。'}});
+$('#forestContinue').onclick=()=>show('map');
+/* duel timing */
+let duelTimer=null,duelReady=false;function startDuel(){clearInterval(duelTimer);duelReady=false;let t=0;$('#duelLog').textContent='對方正在蓄力……抓準瞬間！';duelTimer=setInterval(()=>{t+=80;if(t>1250&&t<1850)duelReady=true;if(t>=2300){clearInterval(duelTimer);duelReady=false;$('#duelLog').textContent='太慢了。影子退後一步。再試一次。';state.energy=Math.max(0,state.energy-1);setTimeout(startDuel,700)}},80)}
+$('#defend').onclick=()=>{if(duelReady){clearInterval(duelTimer);$('#shield').classList.remove('hit');void $('#shield').offsetWidth;$('#shield').classList.add('hit');state.duel=true;addClue('duel');$('#duelLog').textContent='防禦成功！影子的魔杖掉在地上。';setTimeout(()=>show('map'),1300)}else toast('時機不對！')};$('#counter').onclick=()=>toast('先防住攻擊，再找機會。');
+/* start duel when room opened */
+const oldShow=show;show=function(id){oldShow(id);if(id==='duel')setTimeout(startDuel,300)};
+/* tower */
+$$('[data-num]').forEach(b=>b.onclick=()=>{if(state.code.length<4){state.code+=b.dataset.num;$('#codeDisplay').textContent=state.code.split('').join(' ');if(state.code.length===4){if(state.code==='1024'){toast('星圖亮了。原來答案一直在生日裡。');setTimeout(()=>show('final'),1200)}else{toast('星圖沒有反應。再想想生日提示。');state.code='';$('#codeDisplay').textContent='— — — —'}}}});
+$('#codeClear').onclick=()=>{state.code='';$('#codeDisplay').textContent='— — — —'};
+function fireworks(){const f=$('#fire');f.innerHTML='';for(let i=0;i<90;i++){const s=document.createElement('i');s.className='spark';s.style.left=(20+Math.random()*60)+'%';s.style.top=(15+Math.random()*45)+'%';s.style.setProperty('--x',(-180+Math.random()*360)+'px');s.style.setProperty('--y',(80+Math.random()*300)+'px');s.style.animationDelay=(Math.random()*.8)+'s';f.appendChild(s)}}
+const observer=new MutationObserver(()=>{if($('#final').classList.contains('active'))fireworks()});observer.observe($('#final'),{attributes:true,attributeFilter:['class']});
 </script>
 </body>
 </html>
